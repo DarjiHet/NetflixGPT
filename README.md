@@ -36,6 +36,7 @@
 - GPT Search Feture
 - GPT Search Bar
 - (BONUS) Multi - language Feature in our App
+- Integreate GPT APIS
 
 
 #i have a problem with w-screen(w-[100vw]) in videobackreound and header and videotitle and i solved it using w-[99vw]
