@@ -28,3 +28,14 @@
 - Embedded the Youtube video and make it autoplay and mute
 - Tailwind class to make main container look awesome
 - Build Secondary component
+- Build Movie List
+- Bulid Movie Card
+- TMDB Image CDN URL
+- Made the browse page look good
+- use custome hooks
+- GPT Search Feture
+- GPT Search Bar
+- (BONUS) Multi - language Feature in our App
+
+
+#i have a problem with w-screen(w-[100vw]) in videobackreound and header and videotitle and i solved it using w-[99vw]
