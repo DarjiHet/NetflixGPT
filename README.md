@@ -37,6 +37,14 @@
 - GPT Search Bar
 - (BONUS) Multi - language Feature in our App
 - Integreate GPT APIS
-
+- Get Open AI Api Key
+- Gpt Search API Call
+- fetched gptMoviesSuggestions from TMDB
+- created gptSlice added data
+- Resused Movie List component to make movie - suggestion container
+- Memoization
+- Added .env file
+- Adding .env file to gitignore
+- Made our Site Responsive
 
 #i have a problem with w-screen(w-[100vw]) in videobackreound and header and videotitle and i solved it using w-[99vw]
