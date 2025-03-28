@@ -48,3 +48,6 @@
 - Made our Site Responsive
 
 #i have a problem with w-screen(w-[100vw]) in videobackreound and header and videotitle and i solved it using w-[99vw]
+
+
+i can make movieCard bg as black for not showing youtube
