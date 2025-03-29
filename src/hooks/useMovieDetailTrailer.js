@@ -16,7 +16,7 @@ const useMovieDetailTrailer = (movieID) => {
     
         useEffect(() => {
             getMovieVideos();
-        }, []);
+        }, [movieID]);
 
         return movieTrailer;
 }

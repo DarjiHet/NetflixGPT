@@ -15,7 +15,7 @@ const useMovieDetails = (id) => {
 
     useEffect(() => {
         getActionMovies();
-    }, [])
+    }, [id])
 
     return movieDetail;
 }

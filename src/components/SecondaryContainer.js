@@ -1,9 +1,12 @@
 import React from 'react'
 import MovieList from './MovieList'
 import { useSelector } from 'react-redux'
+import ShimmerUi from "./ShimmerUi"
 
 const SecondaryContainer = () => {
   const movies = useSelector(store => store.movies);
+
+  if(movies == null) return <ShimmerUi />;
   return (
     <div className="bg-[#141414]">
       <div className="mt-0 md:-mt-56 pl-4 md:pl-16 relative z-20">

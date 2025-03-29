@@ -15,6 +15,7 @@ import useRomanceMovies from '../hooks/useRomanceMovies';
 import useThrillerMovies from '../hooks/useThrillerMovies';
 import useSciFiMovies from '../hooks/useSciFiMovies';
 import GPTSearch from './GPTSearch';
+import Footer from "./Footer"
 import { useSelector } from 'react-redux';
 
 const Browse = () => {
@@ -45,6 +46,7 @@ const Browse = () => {
           <>
             <MainContainer />
             <SecondaryContainer />
+            <Footer />
           </>
         )}
 
@@ -54,4 +56,4 @@ const Browse = () => {
   )
 }
 
-export default Browse
+export default Browse;

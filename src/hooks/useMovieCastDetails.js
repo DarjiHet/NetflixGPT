@@ -15,7 +15,7 @@ const useMovieCastDetails = (id) => {
 
     useEffect(() => {
         getMovieCast();
-    }, [])
+    }, [id])
     return castDetail;
 }
 

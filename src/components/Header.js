@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { signOut } from "firebase/auth";
 import { auth } from "../utils/firebase"
 import { useNavigate } from 'react-router-dom';
@@ -8,12 +8,14 @@ import { addUser, removeUser } from '../utils/userSlice'
 import { LOGO, SUPPORTED_LANGUAGES, USER_AVATAR } from '../utils/constants';
 import { toggleGptSearchView } from '../utils/gptSlice';
 import { changeLanguage } from '../utils/configSlice';
-const Header = () => {
 
+const Header = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const user = useSelector(store => store.user)
     const showGptSearch = useSelector((store) => store.gpt.showGptSearch)
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false); // Toggle menu state
 
     const handleSignOut = () => {
         signOut(auth).then(() => {
@@ -27,23 +29,23 @@ const Header = () => {
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
-              const { uid, email, displayName, photoURL } = user;
-              dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL, }));
-              navigate("/browse");
+                const { uid, email, displayName, photoURL } = user;
+                dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL: photoURL, }));
+                navigate("/browse");
             } else {
-              // User is signed out
-              dispatch(removeUser());
-              navigate("/")
+                // User is signed out
+                dispatch(removeUser());
+                navigate("/")
             }
-          });
+        });
 
-          return () => unsubscribe();
+        return () => unsubscribe();
     }, []);
 
     const handleGPTSearchClick = () => {
         // toggel gpt search
         dispatch(toggleGptSearchView());
-    } 
+    }
 
     const handleLanguageChange = (e) => {
         dispatch(changeLanguage(e.target.value));
@@ -57,22 +59,48 @@ const Header = () => {
                 src={LOGO}
                 alt="logo"
             />
-            {user && (
-                <div className="flex p-2">
 
-                    {showGptSearch && <select name="Language" className="p-2 bg-red-700 text-white h-10 rounded-lg" onChange={handleLanguageChange}> 
-                        {SUPPORTED_LANGUAGES.map(lang => <option key={lang.identifier} value={lang.identifier}>{lang.name}</option>)}
-                    </select>}
-                    
-                    <button className="py-2 px-4 n-2 text-white" onClick={handleGPTSearchClick}>
+            <button
+                className="sm:hidden absolute right-6"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+                Down
+            </button>
+
+            {user && (
+                <div
+                    className={`absolute top-16 left-0 w-full bg-[#141414] text-center p-4 transition-all duration-300 ease-in-out sm:p-0 sm:static sm:flex sm:space-x-6 sm:w-auto ${isMenuOpen ? "block" : "hidden"
+                        } sm:block`}
+                >
+                    {showGptSearch && (
+                        <select
+                            name="Language"
+                            className="p-2 bg-red-700 text-white h-10 rounded-lg"
+                            onChange={handleLanguageChange}
+                        >
+                            {SUPPORTED_LANGUAGES.map((lang) => (
+                                <option key={lang.identifier} value={lang.identifier}>
+                                    {lang.name}
+                                </option>
+                            ))}
+                        </select>
+                    )}
+
+                    <button
+                        className="py-2 px-4 text-white hover:text-red-500"
+                        onClick={handleGPTSearchClick}
+                    >
                         {showGptSearch ? "Home" : "GPT Search"}
                     </button>
-                    <img
-                        className="w-10 h-10"
-                        src={USER_AVATAR}
-                        alt="profile_logo"
-                    />
-                    <button onClick={handleSignOut} className="font-bold text-white ml-2"> Sign Out </button>
+
+                    <img className="w-10 h-10 mx-auto" src={USER_AVATAR} alt="profile" />
+
+                    <button
+                        onClick={handleSignOut}
+                        className="font-bold text-white mt-2 sm:mt-0"
+                    >
+                        Sign Out
+                    </button>
                 </div>
             )}
         </div>
